@@ -1,5 +1,8 @@
 # Trabalho 1 — Introdução ao Processamento de Imagens
 
+**Aluno:** Luidgi Varela Carneiro  
+**Matrícula:** 231011669
+
 Implementação em Python das funções `TAM2`, `TAMM` e `SUPERRES`, além dos
 experimentos de correção gamma e equalização de histograma.
 
