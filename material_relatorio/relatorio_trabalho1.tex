@@ -19,7 +19,7 @@ Universidade de Brasília}}
 \maketitle
 
 \begin{abstract}
-Este trabalho implementa três operações de aumento e combinação de imagens: repetição por fator dois (TAM2), interpolação por médias (TAMM) e inserção alternada de duas imagens (SUPERRES). Na Questão 1 foram utilizadas duas fotografias próprias do mesmo carrinho, obtidas de perspectivas ligeiramente diferentes. Na Questão 2 foram comparadas correção power-law, com quatro valores de gamma, e equalização de histograma nas imagens \,	exttt{car.png}, \,	exttt{crowd.png} e \,	exttt{university.png}. Os resultados mostram a preservação de blocos pela repetição, a suavização produzida pelas médias, a sensibilidade da SUPERRES ao desalinhamento e os efeitos distintos de gamma e da equalização sobre o contraste.
+Este trabalho implementa três operações de aumento e combinação de imagens: repetição por fator dois (TAM2), interpolação por médias (TAMM) e inserção alternada de duas imagens (SUPERRES). Na Questão 1 foram utilizadas duas fotografias próprias do mesmo carrinho, obtidas de perspectivas ligeiramente diferentes. Na Questão 2 foram comparadas correção power-law, com quatro valores de gamma, e equalização de histograma nas imagens \,\texttt{car.png}, \,\texttt{crowd.png} e \,\texttt{university.png}. Os resultados mostram a preservação de blocos pela repetição, a suavização produzida pelas médias, a sensibilidade da SUPERRES ao desalinhamento e os efeitos distintos de gamma e da equalização sobre o contraste.
 \end{abstract}
 
 \section{Introdução}
@@ -56,16 +56,14 @@ Na SUPERRES, a diferença entre as perspectivas causa duplicações, deslocament
 \end{figure*}
 
 \subsection{Questão 2}
-A Figura~\ref{fig:q2} mostra uma comparação compacta dos métodos. Para as alternativas testadas, foram destacados como melhores compromissos de visibilidade $\gamma=0.7$ para \texttt{car}, $\gamma=0.4$ para \texttt{crowd} e $\gamma=0.4$ para \texttt{university}. Os valores menores que um revelaram detalhes em regiões escuras, enquanto os valores maiores que um escureceram as cenas e reduziram a informação visual em áreas já pouco iluminadas.
+A comparação da Figura 2 apresenta um conjunto de painéis por imagem em sequência vertical. Essa organização aumenta a legibilidade dos títulos e evita comprimir nove imagens em uma única faixa horizontal. Para as alternativas testadas, foram destacados como melhores compromissos de visibilidade $\gamma=0.7$ para \texttt{car}, $\gamma=0.4$ para \texttt{crowd} e $\gamma=0.4$ para \texttt{university}. Os valores menores que um revelaram detalhes em regiões escuras, enquanto os valores maiores que um escureceram as cenas e reduziram a informação visual em áreas já pouco iluminadas.
 
-\begin{figure*}[t]
-\centering
-\includegraphics[width=0.32\textwidth]{car_comparacao.png}\hfill
-\includegraphics[width=0.32\textwidth]{crowd_comparacao.png}\hfill
-\includegraphics[width=0.32\textwidth]{university_comparacao.png}
-\caption{Comparações entre correção gamma e equalização para as três imagens.}
-\label{fig:q2}
-\end{figure*}
+\begin{center}
+\includegraphics[width=0.98\columnwidth]{car_comparacao.png}\\[-1mm]
+\includegraphics[width=0.98\columnwidth]{crowd_comparacao.png}\\[-1mm]
+\includegraphics[width=0.98\columnwidth]{university_comparacao.png}\\[-1mm]
+\footnotesize\textbf{Fig. 2.} Comparações de correção gamma e equalização para \texttt{car}, \texttt{crowd} e \texttt{university}.
+\end{center}
 
 Na imagem \texttt{car}, a equalização produz contraste mais forte que as duas alternativas gamma exibidas. Na imagem \texttt{crowd}, ela revela detalhes em diferentes regiões da cena, embora também intensifique diferenças locais. Na imagem \texttt{university}, originalmente escura, a equalização amplia a visibilidade da praça e das árvores. Assim, gamma é mais controlável para ajustar brilho, enquanto a equalização é mais apropriada quando se busca uma redistribuição global do contraste.
 
@@ -76,6 +74,21 @@ Na imagem \texttt{car}, a equalização produz contraste mais forte que as duas 
 \end{center}
 
 Como mostra a Fig. 3, a equalização desloca a distribuição dos níveis e espalha a CDF pelo intervalo de intensidades. As médias e os desvios-padrão dos quatro valores de gamma para cada imagem foram registrados em \texttt{metricas\_gamma.csv}; eles confirmam numericamente a tendência visual de clareamento para $\gamma<1$ e escurecimento para $\gamma>1$.
+
+\begin{table}[!t]
+\caption{Métricas das alternativas gamma destacadas.}
+\label{tab:metricas}
+\centering
+\begin{tabular}{lccc}
+\toprule
+Imagem & $\gamma$ & Média & Desvio-padrão\\
+\midrule
+\texttt{car} & 0.7 & 157.66 & 15.70\\
+\texttt{crowd} & 0.4 & 96.84 & 38.73\\
+\texttt{university} & 0.4 & 76.79 & 22.90\\
+\bottomrule
+\end{tabular}
+\end{table}
 
 \section{Conclusões}
 As validações numéricas confirmaram a repetição de linhas e colunas na TAM2, os valores médios da TAMM e o posicionamento alternado das duas imagens na SUPERRES. Nas fotografias reais, a TAM2 foi a operação mais simples e preservou blocos, a TAMM produziu uma aparência mais contínua e a SUPERRES evidenciou a sensibilidade a diferenças de perspectiva e a posições não preenchidas.
