@@ -80,7 +80,27 @@ def test_functions():
 
 def run_experiments():
     test_functions(); (OUT/'q1').mkdir(parents=True, exist_ok=True); (OUT/'q2').mkdir(parents=True, exist_ok=True); FIG.mkdir(exist_ok=True)
-    (OUT/'q1'/'README.txt').write_text('FRUIT1 e FRUIT2 não foram fornecidas; funções validadas com matrizes artificiais.\n', encoding='utf-8')
+    # Q1: duas fotografias próprias do mesmo carrinho, fornecidas pelo aluno.
+    photo1 = np.array(Image.open(ORIG/'foto_carro_1.jpg').convert('RGB'))
+    photo2 = np.array(Image.open(ORIG/'foto_carro_2.jpg').convert('RGB'))
+    if photo1.shape != photo2.shape:
+        raise ValueError('As duas fotografias da Questão 1 precisam ter as mesmas dimensões.')
+    save_image(photo1, OUT/'q1'/'foto_carro_1_original.jpg')
+    save_image(photo2, OUT/'q1'/'foto_carro_2_original.jpg')
+    save_image(TAM2(photo1, 2), OUT/'q1'/'foto_carro_1_TAM2_fator2.jpg')
+    save_image(TAM2(photo1, 8), OUT/'q1'/'foto_carro_1_TAM2_fator8.jpg')
+    save_image(TAMM(photo1), OUT/'q1'/'foto_carro_1_TAMM_fator2.jpg')
+    save_image(SUPERRES(photo1, photo2), OUT/'q1'/'SUPERRES_fotos_carro.jpg')
+    (OUT/'q1'/'README.txt').write_text('Fotografias próprias do mesmo carrinho, em perspectivas ligeiramente diferentes.\nDimensão original: 864 x 1536 pixels (RGB).\nTAM2 fator 2 e 8, TAMM fator 2 e SUPERRES foram executados.\n', encoding='utf-8')
+    # Comparação compacta para o relatório; a imagem SUPERRES mantém exatamente
+    # o posicionamento esparso exigido no enunciado.
+    fig, ax = plt.subplots(2, 3, figsize=(12, 8))
+    q1_imgs = [photo1, TAM2(photo1,2), TAMM(photo1), photo2, SUPERRES(photo1,photo2), TAM2(photo1,8)]
+    q1_titles = ['Foto 1 original', 'TAM2 fator 2', 'TAMM fator 2', 'Foto 2 original', 'SUPERRES', 'TAM2 fator 8']
+    for a, img, title in zip(ax.flat, q1_imgs, q1_titles):
+        a.imshow(img); a.set_title(title); a.axis('off')
+    fig.suptitle('Questão 1 — comparação das operações', fontsize=14); fig.tight_layout()
+    fig.savefig(FIG/'q1_comparacao.png', dpi=180); plt.close(fig)
     a=np.array([[10,12],[5,7]],dtype=np.uint8)
     (OUT/'q1'/'testes_matrizes.txt').write_text('TAM2(a,2):\n'+str(TAM2(a,2))+'\n\nTAMM(a):\n'+str(TAMM(a))+'\n\nSUPERRES(a,a+1):\n'+str(SUPERRES(a,a+1))+'\n\nTAM2(a,8) dimensao: '+str(TAM2(a,8).shape)+'\n',encoding='utf-8')
     rows=[]

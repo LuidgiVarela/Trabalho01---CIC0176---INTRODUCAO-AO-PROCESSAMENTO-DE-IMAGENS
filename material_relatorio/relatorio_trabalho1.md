@@ -10,7 +10,8 @@ de duas imagens em posições alternadas (`SUPERRES`). Também são comparados o
 realce por correção power-law e a equalização de histograma nas imagens
 `car.png`, `crowd.png` e `university.png`. Para a imagem do carro são
 apresentados histogramas e funções de distribuição acumulada antes e depois
-da equalização.
+da equalização. Na Questão 1 são utilizadas duas fotografias próprias do
+mesmo carrinho, obtidas de perspectivas ligeiramente diferentes.
 
 ## 1. Introdução
 
@@ -37,6 +38,12 @@ existem; nas bordas, repete a amostra disponível. `SUPERRES` escreve a
 primeira imagem nas posições linha/coluna ímpares e a segunda nas posições
 pares. Matrizes artificiais verificam os valores do exemplo do enunciado.
 
+Além dos testes artificiais, foram processadas duas fotografias RGB próprias
+do mesmo objeto, ambas com 864×1536 pixels. As fotografias foram mantidas em
+seus arquivos originais e não foram redimensionadas. A `SUPERRES` foi aplicada
+diretamente, sem alinhamento geométrico adicional, para não alterar o
+algoritmo solicitado.
+
 Para a Questão 2, foram testados gamma `0.4`, `0.7`, `1.4` e `2.2` em cada
 imagem. A equalização foi implementada pela CDF do histograma. Todas as
 imagens geradas estão em `resultados/q2/`; as figuras selecionadas estão em
@@ -48,6 +55,15 @@ As dimensões originais são: `car` 600×338, `crowd` 800×600 e `university`
 399×300. Os quatro resultados de gamma e o resultado equalizado de cada
 imagem foram salvos individualmente. As comparações visuais estão em
 `car_comparacao.png`, `crowd_comparacao.png` e `university_comparacao.png`.
+
+Na Questão 1, `TAM2` fator 2, `TAMM` e `SUPERRES` produzem imagens de
+1728×3072 pixels, enquanto `TAM2` fator 8 produz 6912×12288 pixels. A
+repetição de `TAM2` preserva blocos de pixels e evidencia descontinuidades.
+`TAMM` suaviza as transições com médias horizontal, vertical e diagonal. A
+`SUPERRES` posiciona as duas fotos nas coordenadas especificadas, mas a
+diferença de perspectiva provoca duplicação, deslocamento e padrões esparsos
+visíveis na composição. Esses artefatos são esperados e não foram corrigidos
+artificialmente. A figura `q1_comparacao.png` reúne os resultados principais.
 
 Para cada imagem, gamma abaixo de um clareou a saída e gamma acima de um a
 escureceu, como previsto pela transformação. As médias e desvios-padrão de
@@ -72,6 +88,7 @@ médias da `TAMM` e o posicionamento alternado da `SUPERRES`. A correção gamma
 produziu mudanças previsíveis de brilho, enquanto a equalização alterou o
 contraste com base no histograma.
 
-As imagens `FRUIT1` e `FRUIT2`, exigidas para os resultados visuais da
-Questão 1, não estavam no material recebido. Essa parte não pode ser
-apresentada com as imagens originais sem que elas sejam fornecidas.
+As fotografias próprias permitiram concluir a Questão 1 visualmente. A
+`TAM2` é simples e preserva os valores, mas produz blocos; `TAMM` fornece uma
+aparência mais contínua; e `SUPERRES` demonstra a disposição dos pixels de
+duas aquisições, embora seja sensível ao desalinhamento entre perspectivas.
