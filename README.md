@@ -17,15 +17,19 @@ Dependências: Python 3, `numpy`, `Pillow` e `matplotlib`.
 
 ```powershell
 python src/trabalho1.py
-python src/gerar_relatorio_pdf.py
+cd material_relatorio
+pdflatex -interaction=nonstopmode relatorio_trabalho1.tex
+pdflatex -interaction=nonstopmode relatorio_trabalho1.tex
 ```
 
 As imagens originais estão em `originais/`; os resultados individuais estão
 em `resultados/`; e as figuras/métricas selecionadas para o relatório estão em
 `material_relatorio/`.
 
-O relatório em Markdown está em `material_relatorio/relatorio_trabalho1.md` e
-o PDF em formato de duas colunas está em `material_relatorio/relatorio_ieee.pdf`.
+O relatório em Markdown está em `material_relatorio/relatorio_trabalho1.md`.
+O relatório final compilado com a classe oficial `IEEEtran` está em
+`material_relatorio/relatorio_trabalho1.pdf`; o fonte editável está em
+`material_relatorio/relatorio_trabalho1.tex`.
 
 O ZIP fornecido continha somente `car.png`, `crowd.png` e `university.png`.
 `FRUIT1` e `FRUIT2`, exigidas para os resultados visuais da Questão 1, não

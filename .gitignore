@@ -3,3 +3,6 @@ __pycache__/
 .venv/
 venv/
 .DS_Store
+material_relatorio/*.aux
+material_relatorio/*.log
+material_relatorio/*.out
